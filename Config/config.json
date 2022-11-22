@@ -1,0 +1,16 @@
+{
+	"autoloadFolder": [
+		"Framework",
+		"Controller",
+		"Model",
+		"Framework/Exception"
+	],
+	"database":  {
+            "name": "Ma base de données",
+            "dbname": "database",
+            "host": "localhost",
+            "user": "user",
+            "password": "pwd"
+    },
+	"basepath" : "/FRAMEWORK-PHP"
+}
