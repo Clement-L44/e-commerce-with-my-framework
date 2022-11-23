@@ -3,11 +3,12 @@
 	{
 		public function Login()
 		{
-			$this->View("login");
+			$this->view("login");
 		}
 		
-		public function Authenticate($login,$password)
+		public function Authenticate($email,$password)
 		{
-			$user = $this->UserManager->getByMail($login);
+			//$user = $this->UserManager->getByMail($email);
+			var_dump($email, $password);
 		}
 	}

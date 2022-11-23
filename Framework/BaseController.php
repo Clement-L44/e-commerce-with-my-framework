@@ -31,15 +31,15 @@
                 Js: /View/{$controller}/js/accueil.js
                 !!!!
             */
-            if(file_exists("View/" . $this->_httprequest->getRoute()->getController() . "/css/" . $filename . ".css"))
+            if(file_exists("View/" . $this->_httpRequest->getRoute()->getController() . "/css/" . $filename . ".css"))
 			{
-				$this->addCss("View/" . $this->_httprequest->getRoute()->getController() . "/css/" . $filename . ".css");
+				$this->addCss("View/" . $this->_httpRequest->getRoute()->getController() . "/css/" . $filename . ".css");
 			}
-			if(file_exists("View/" . $this->_httprequest->getRoute()->getController() . "/js/" . $filename . ".js"))
+			if(file_exists("View/" . $this->_httpRequest->getRoute()->getController() . "/js/" . $filename . ".js"))
 			{
-				$this->addJs("View/" . $this->_httprequest->getRoute()->getController() . "/js/" . $filename . ".js");
+				$this->addJs("View/" . $this->_httpRequest->getRoute()->getController() . "/js/" . $filename . ".js");
 			}
-            if(file_exists("View/" . $this->_httprequest->getRoute()->getController() . "/" . $filename . ".php")){
+            if(file_exists("View/" . $this->_httpRequest->getRoute()->getController() . "/" . $filename . ".php")){
                 /*
                    ob_start will indicate that we want to put the display in memory instead of sending it to the browser, 
                    ob_get_clean will retrieve the generated content and clear the buffer. Inside the buffer, we add the variables and the view.
@@ -59,7 +59,7 @@
                     It also checks for collisions with existing variables in the symbol table.
                 */
                 extract($this->_param);
-                include("View/" . $this->_httprequest->getRoute()->getController() . "/" . $filename . ".php");
+                include("View/" . $this->_httpRequest->getRoute()->getController() . "/" . $filename . ".php");
                 /*
                     ob_get_clean(): Reads the current contents of the output buffer then clears it.
                 */
@@ -68,15 +68,15 @@
             } else {
                 throw new ViewNotFoundException();
             }
-
         }
 
         // Manage the data access managers that the controller will be able to use
         public function bindManager()
-        {
+        {   
             foreach($this->_httpRequest->getRoute()->getManager() as $manager)
 			{
 				$this->$manager = new $manager($this->_config->database);
+                var_dump($this->_config);
 			}
         }
 

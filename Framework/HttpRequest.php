@@ -3,7 +3,6 @@
     /*
         Request HTTP : It is a communication protocol between two computers based on URI. This allows communication via urls.
     */
-
     class HttpRequest {
 
         //  The query data we need
@@ -39,27 +38,26 @@
         // Browse the parameters defined in the route found and check if they were passed during the request. 
         // If so, we assign them to the $_param property of HttpRequest, along with the keys and values!
         public function bindParam(){
-
             switch($this->_method){
-                case "GET":
+				case "GET":
                 case "DELETE":
-                    if(preg_match("#" . $this->_route->path . "#",$this->_url,$matches))
-					{
-						for($i=1;$i<count($matches)-1;$i++)
-						{
-							$this->_param[] = $matches[$i];	
-						}
-					}
+                    foreach($this->_route->getParam() as $param)
+                    {
+                        if(isset($_GET[$param]))
+                        {
+                            $this->_param[] = $_GET[$param];
+                        }
+                    }
                 case "POST":
                 case "PUT":
-                    foreach($this->_route->getParam() as $param){
+                    foreach($this->_route->getParam() as $param)
+                    {
                         if(isset($_POST[$param]))
-						{
-							$this->_param[] = $_POST[$param];
-						}
+                        {
+                            $this->_param[] = $_POST[$param];
+                        }
                     }
             }
-
         }
 
         public function getRoute()
@@ -80,7 +78,7 @@
         public function run($config)
         {
             $this->bindParam();
-            $this->_route->run($this,$config);
+            $this->_route->run($this, $config);
         }
         
         public function addParam($value)

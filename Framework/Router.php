@@ -19,8 +19,8 @@
 			$url = str_replace($basepath,"",$httpRequest->getUrl());
 			$method = $httpRequest->getMethod();
 			// Finds the route(s) associated with the HTTP request
-			$routeFound = array_filter($this->_listRoute,function($route) use ($httpRequest){
-				return preg_match("#^" . $route->path . "$#", $httpRequest->getUrl()) && $route->method == $httpRequest->getMethod();
+			$routeFound = array_filter($this->_listRoute,function($route) use ($url,$method){
+				return preg_match("#^" . $route->path . "$#", $url) && $route->method == $method;
 			});
 			$numberRoute = count($routeFound);
 			if($numberRoute > 1)

@@ -3,14 +3,16 @@
 		"Framework",
 		"Controller",
 		"Model",
+		"Model/Entity",
+		"Model/Manager",
 		"Framework/Exception"
 	],
 	"database":  {
-            "name": "Ma base de données",
-            "dbname": "database",
+            "name": "full-php-e-commerce",
+            "dbname": "full-php-e-commerce",
             "host": "localhost",
-            "user": "user",
-            "password": "pwd"
+            "user": "root",
+            "password": ""
     },
-	"basepath" : "/FRAMEWORK-PHP"
+	"basepath" : "/eCommerce"
 }

@@ -15,12 +15,18 @@
             if(empty(self::$_instance)){
                 self::$_instance = new BDD($datasource);
             }
-            return self::$_instance->_bdd;;
+            return self::$_instance->_bdd;
         }
 
         private function __construct($datasource)
         {
-            $this->_bdd = new PDO('mysql:dbname='.$datasource->dbname.';host='.$datasource->host,$datasource->user, $datasource->password);
+            //var_dump($datasource);
+            $this->_bdd = new PDO('mysql:host='.$datasource->host.';dbname='.$datasource->dbname.';charset=utf8',$datasource->user, $datasource->password);
         }
+
+        public function getBdd()
+		{
+			return $this->_bdd;
+		}
 
     }
