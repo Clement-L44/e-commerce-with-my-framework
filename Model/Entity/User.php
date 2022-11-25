@@ -11,13 +11,15 @@
         private $when_deleted;
         private $password;
 
-        public function __construct($firstname, $lastname, $email, $phone, $roles)
+        public function __construct($firstname, $lastname, $email, $phone, $roles, $when_deleted = null, $password)
         {
             $this->firstname = $firstname;
             $this->lastname = $lastname;
             $this->email = $email;
             $this->phone = $phone;
             $this->roles = $roles;
+            $this->when_deleted = $when_deleted;
+            $this->password = $this->crypt_password($password);
         }
 
         public function getId(){
@@ -83,6 +85,10 @@
 
         public function check_password(){
             
+        }
+
+        public function crypt_password($data){
+            return password_hash($data, PASSWORD_BCRYPT);
         }
 
         public function setPassword($data){

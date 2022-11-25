@@ -35,5 +35,30 @@
         "method" : "GET",
         "param" : [],
         "manager": []
+    },
+    {
+        "path" : "/register",
+        "controller" : "User",
+        "action" : "Register",
+        "method" : "GET",
+        "param" : [],
+        "manager": []
+    },
+    {
+        "path" : "/register",
+        "controller" : "User",
+        "action" : "Process_register",
+        "method" : "POST",
+        "param" : [
+            "firstname",
+            "lastname",
+            "email",
+            "phone",
+            "roles",
+            "password"
+        ],
+        "manager": [
+            "UserManager"
+        ]
     }
 ]

@@ -2,6 +2,7 @@
 	"autoloadFolder": [
 		"Framework",
 		"Controller",
+		"Controller/Admin",
 		"Model",
 		"Model/Entity",
 		"Model/Manager",
