@@ -50,9 +50,11 @@
         {
             $controller = null;
 			$controllerName = $this->_controller . "Controller";
+            //var_dump($config);
             if(class_exists($controllerName))
             {  
                 $controller = new $controllerName($httpRequest,$config);
+                
                 if(method_exists($controller, $this->_action))
                 {
                     // Execute controller action $this->_action

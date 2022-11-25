@@ -10,7 +10,7 @@
         public function __construct($httpRequest, $config)
         {
             $this->_httpRequest = $httpRequest;
-            $this->_config = $httpRequest;
+            $this->_config = $config;
 			$this->_param = array();
 			$this->addParam("httprequest",$this->_httpRequest);
 			$this->addParam("config",$this->_config);
@@ -75,8 +75,7 @@
         {   
             foreach($this->_httpRequest->getRoute()->getManager() as $manager)
 			{
-				$this->$manager = new $manager($this->_config->database);
-                var_dump($this->_config);
+                $this->$manager = new $manager($this->_config->database);
 			}
         }
 

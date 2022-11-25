@@ -25,7 +25,7 @@
             "password"
         ],
         "manager": [
-            "User"
+            "UserManager"
         ]
     },
     {

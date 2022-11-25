@@ -6,9 +6,9 @@
 			$this->view("login");
 		}
 		
-		public function Authenticate($email,$password)
+		public function Authenticate($login,$password)
 		{
-			//$user = $this->UserManager->getByMail($email);
-			var_dump($email, $password);
+			$user = $this->UserManager->getByMail($login);
+			var_dump($user);
 		}
 	}

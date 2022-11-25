@@ -28,6 +28,7 @@ spl_autoload_register(function($class) use ($config)
 /* -------------------------------------------------------------------------- */
 /*                                   ROUTER                                   */
 /* -------------------------------------------------------------------------- */
+
 try{
     $httpRequest = new HttpRequest();
     $router = new Router();
