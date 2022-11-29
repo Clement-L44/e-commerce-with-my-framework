@@ -54,9 +54,9 @@
              */
             $boundParam = array();
             foreach($param as $paramName){
-                $boundParam[$paramName] = $obj->$paramName;
+                array_push($boundParam, $obj->__get($paramName));
             }
-            $req->execute($param);
+            return $req->execute($boundParam);
         }
 
         public function update($obj, $param)

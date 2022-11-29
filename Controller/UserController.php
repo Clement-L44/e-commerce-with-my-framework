@@ -9,16 +9,17 @@
 		public function Authenticate($login,$password)
 		{
 			$user = $this->UserManager->getByMail($login);
-			var_dump($user);
 		}
 
-		public function Register(){
+		public function Register()
+		{
 			$this->view("register");
 		}
 
-		public function Process_register($firstname, $lastname, $email, $phone, $roles, $password){
-
-			var_dump($firstname, $lastname, $email, $phone, $roles, $password);
-
+		public function Registration($firstname, $lastname, $email, $phone, $password)
+		{
+			$user = new User($firstname, $lastname, $email, $phone, $password);
+			$this->UserManager->create($user, ["firstname", "lastname", "email", "phone", "password", "roles", "when_deleted"]);
+			var_dump($this->UserManager->create($user, ["firstname", "lastname", "email", "phone", "password", "roles", "when_deleted"]));
 		}
 	}

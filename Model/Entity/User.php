@@ -11,62 +11,71 @@
         private $when_deleted;
         private $password;
 
-        public function __construct($firstname, $lastname, $email, $phone, $roles, $when_deleted = null, $password)
+        const ROLE_USER = 'role_user';
+        const ROLE_ADMIN = 'role_admin';
+
+        public function __construct($firstname, $lastname, $email, $phone, $password)
         {
             $this->firstname = $firstname;
             $this->lastname = $lastname;
             $this->email = $email;
             $this->phone = $phone;
-            $this->roles = $roles;
-            $this->when_deleted = $when_deleted;
-            $this->password = $this->crypt_password($password);
+            $this->password = $password;
+            $this->when_deleted = null;
+            $this->roles = 'role_user';
         }
 
-        public function getId(){
+        public function __get($property){
+            if(property_exists($this, $property)){
+                return $this->$property;
+            }
+        }
+
+        public function getId() :int{
             return $this->id_user;
         }
 
-        public function getFirstname(){
+        public function getFirstname() :string{
             return $this->firstname;
         }
 
-        public function setFirstName($data){
+        public function setFirstname(string $data) :void{
             $this->firstname = $data;
         }
 
-        public function getLastName(){
+        public function getLastname() :string{
             return $this->lastname;
         }
 
-        public function setLastName($data){
+        public function setLastname(string $data) :void{
             $this->lastname = $data;
         }
 
-        public function getEmail(){
+        public function getEmail() :string{
             return $this->email;
         }
 
-        public function setEmail($data){
+        public function setEmail(string $data) :void{
             $this->email = $data;
         }
 
-        public function getPhone(){
+        public function getPhone() :string{
             return $this->phone;
         }
 
-        public function setPhone($data){
+        public function setPhone(string $data) :void{
             $this->phone = $data;
         }
 
-        public function getRoles(){
+        public function getRoles() :string{
             return $this->roles;
         }
 
-        public function setRoles($data){
+        public function setRoles(string $data) :void{
             $this->roles = $data;
         }
 
-        public function check_deleted(){
+        public function check_deleted(): ?mixed{
             if($this->when_deleted != null){
                 return $this->when_deleted;
             } else {
@@ -74,28 +83,28 @@
             }
         }
 
-        public function delete(){
+        public function delete() :void{
             $date = new DateTime();
             $this->when_deleted = $date->format('Y-m-d H:i:s');
         }
 
-        public function reactivited(){
+        public function reactivited() :self{
             $this->when_deleted = null;
+            return $this;
         }
 
-        public function check_password(){
-            
+        public function check_password() :string{
+            return $this->password;
         }
 
-        public function crypt_password($data){
+        public function crypt_password(string $data) :string{
             return password_hash($data, PASSWORD_BCRYPT);
         }
 
-        public function setPassword($data){
+        public function setPassword(string $data) :void{
             $hashPassword = password_hash($data, PASSWORD_BCRYPT);
             $this->password = $hashPassword;
         }
-
     }
 
 ?>

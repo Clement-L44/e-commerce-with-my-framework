@@ -47,14 +47,13 @@
     {
         "path" : "/register",
         "controller" : "User",
-        "action" : "Process_register",
+        "action" : "Registration",
         "method" : "POST",
         "param" : [
             "firstname",
             "lastname",
             "email",
             "phone",
-            "roles",
             "password"
         ],
         "manager": [
