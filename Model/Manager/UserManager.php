@@ -12,12 +12,10 @@
         {
             $req = $this->_bdd->prepare("SELECT * FROM User WHERE email = :email");
             $req->bindParam('email', $mail);
+            //$req->setFetchMode(PDO::FETCH_CLASS,'User');
             $req->execute();
-            $req->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE,"User");
 			return $req->fetch();   
         }
-
-        
 
     }
 

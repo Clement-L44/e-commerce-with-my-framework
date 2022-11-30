@@ -1,3 +1,8 @@
+
+<?php if(array_key_exists("error", $this->_param)): ?>
+	<p> <?php  echo $this->_param["error"] ?> </p>
+<?php endif ?>
+
 <form class="register-form" action="register" method="post"> 
 
 	<label>Firstname</label>

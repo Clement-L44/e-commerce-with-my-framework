@@ -92,6 +92,19 @@
 		{
 			$this->_fileManager->addJs($file);
 		}
+
+        public function redirect_to_route($url){
+            header('Location: /eCommerce'.$url);
+            die();
+        }
+
+        public function get__param(string $param = null){
+            if($param != null && array_key_exists($param, $this->_param)){
+                return $this->_param[$param];
+            } else {
+                return $this->_param;
+            }
+        }
     }
 
 

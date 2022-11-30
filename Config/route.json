@@ -59,5 +59,27 @@
         "manager": [
             "UserManager"
         ]
+    },
+    {
+        "path" : "/update",
+        "controller" : "User",
+        "action" : "Update",
+        "method" : "GET",
+        "param" : [
+            "id"
+        ],
+        "manager": [
+            "UserManager"
+        ]
+    },
+    {
+        "path" : "/users",
+        "controller" : "User",
+        "action" : "listUsers",
+        "method" : "GET",
+        "param" : [],
+        "manager": [
+            "UserManager"
+        ]
     }
 ]
