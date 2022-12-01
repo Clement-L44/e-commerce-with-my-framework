@@ -37,9 +37,10 @@
 			return $this->view("listUsers");
 		}
 
-		public function Update(int $id)
+		public function Update(/*int $id_user*/)
 		{
-			$user = $this->UserManager->getById($id);
+			//var_dump('ok');
+			//$user = $this->UserManager->getById($id);
 			return $this->view("update");
 		}
 	}

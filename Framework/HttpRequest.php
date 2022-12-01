@@ -52,6 +52,7 @@
                 case "PUT":
                     foreach($this->_route->getParam() as $param)
                     {
+                        var_dump($param);
                         if(isset($_POST[$param]))
                         {
                             $this->_param[] = $_POST[$param];

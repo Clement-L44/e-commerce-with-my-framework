@@ -22,7 +22,7 @@
         {
             $req = $this->_bdd->prepare("SELECT * FROM ".$this->_table." WHERE id=?");
             $req->execute(array($id));
-            $req->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE,$this->_object);
+            $req->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, $this->_object);
             return $req->fetch();
         }
 
@@ -30,10 +30,9 @@
         {
             $req = $this->_bdd->prepare("SELECT * FROM ".$this->_table);
             $req->execute();
-            // Transform the results into an object class.
-            //$req->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE,$this->_object);
             $req->setFetchMode(PDO::FETCH_ASSOC);
-            return $req->fetchAll();
+            $result = $req->fetchAll();
+            return $result;
         }
 
         public function create($obj, $param)
@@ -49,11 +48,7 @@
             */
             $valueString = implode(", ",$valueArray);
             $sql = "INSERT INTO ".$this->_table."(".implode(", ", $param) . ") VALUES(".$valueString.")";
-            try{
-                $req = $this->_bdd->prepare($sql);
-            } catch (PDOException $pdoException){
-                return $pdoException->getMessage();
-            }
+            $req = $this->_bdd->prepare($sql);
             /**
              * !! Execute expects an array with the exact number of parameters provided in the request and in the correct order, while $obj is an object that contains all the properties. !!
              */
@@ -61,8 +56,12 @@
             foreach($param as $paramName){
                 array_push($boundParam, $obj->__get($paramName));
             }
-            $req->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, $this->_object);
-            $exec = $req->execute($boundParam);
+            try{
+                $req->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, $this->_object);
+                $exec = $req->execute($boundParam);
+            } catch (PDOException $pdoException){
+                return $pdoException->getMessage();
+            }
             
             if($exec == false){
                 return "Error code : " .$req->errorCode()." - Message : ".$req->errorInfo()[2];

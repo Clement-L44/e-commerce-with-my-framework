@@ -61,10 +61,10 @@
         ]
     },
     {
-        "path" : "/update",
+        "path" : "/user/update",
         "controller" : "User",
         "action" : "Update",
-        "method" : "GET",
+        "method" : "PUT",
         "param" : [
             "id"
         ],
@@ -75,7 +75,7 @@
     {
         "path" : "/users",
         "controller" : "User",
-        "action" : "listUsers",
+        "action" : "ListUsers",
         "method" : "GET",
         "param" : [],
         "manager": [

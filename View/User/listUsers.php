@@ -1,10 +1,6 @@
 <p>ListUsers</p>
 
-
-<?php var_dump($this->_param["users"]) ?>
-
 <table>
-
     <tr>
         <th>id</th>
         <th>Firstname</th>
@@ -14,13 +10,13 @@
         <th>roles</th>
     </tr>
     <?php foreach ($this->_param["users"] as $key => $user): ?>
-        <?php var_dump($user) ?>
-        <td><?php $user["id_user"] ?></td>
-        <td><?php $user["firstname"] ?></td>
-        <td><?php $user["lastname"] ?></td>
-        <td><?php $user["email"] ?></td>
-        <td><?php $user["phone"] ?></td>
-        <td><?php $user["roles"] ?></td>
+        <tr>
+            <td><?php echo $user["id_user"] ?></td>
+            <td><?php echo $user["firstname"] ?></td>
+            <td><?php echo $user["lastname"] ?></td>
+            <td><?php echo $user["email"] ?></td>
+            <td><?php echo $user["phone"] ?></td>
+            <td><?php echo $user["roles"] ?></td>
+        </tr>
     <?php endforeach; ?>
-
 </table>
