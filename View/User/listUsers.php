@@ -7,16 +7,16 @@
         <th>Lastname</th>
         <th>Email</th>
         <th>Phone</th>
-        <th>roles</th>
+        <th>Rôles</th>
     </tr>
     <?php foreach ($this->_param["users"] as $key => $user): ?>
         <tr>
-            <td><?php echo $user["id_user"] ?></td>
-            <td><?php echo $user["firstname"] ?></td>
-            <td><?php echo $user["lastname"] ?></td>
-            <td><?php echo $user["email"] ?></td>
-            <td><?php echo $user["phone"] ?></td>
-            <td><?php echo $user["roles"] ?></td>
+            <td><?php echo $user->getId() ?></td>
+            <td><?php echo $user->getFirstname() ?></td>
+            <td><?php echo $user->getLastname() ?></td>
+            <td><?php echo $user->getEmail() ?></td>
+            <td><?php echo $user->getPhone() ?></td>
+            <td><?php echo $user->getRoles() ?></td>
         </tr>
     <?php endforeach; ?>
 </table>

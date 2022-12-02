@@ -76,13 +76,16 @@
 
         public function update($obj, $param)
         {
+            //var_dump($obj);
             $sql = "UPDATE ".$this->_table." SET ";
             foreach($param as $paramName){
                 $sql = $sql.$paramName." = ?, ";
             }
-            $sql = $sql." WHERE id_user=? ";
+            $sql = $sql." WHERE id_user = :id ";
             $req = $this->_bdd->prepare($sql);
-            $param[] = 'id_user';
+            $req->bindParam(':id', $obj->getId(), PDO::PARAM_INT);
+            //$param[] = $obj->getId();
+            //var_dump($param);
             /**
              * !! Execute expects an array with the exact number of parameters provided in the request and in the correct order, while $obj is an object that contains all the properties. !!
              */
@@ -96,6 +99,7 @@
                 }
                 
             }
+            //array_push($boundParam, (int)$obj->getId());
             $exec = $req->execute($boundParam);
             if($exec == false){
                 return "Error code : " .$req->errorCode()." - Message : ".$req->errorInfo()[2];
