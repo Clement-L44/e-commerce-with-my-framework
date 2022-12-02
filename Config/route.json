@@ -97,5 +97,17 @@
         "manager": [
             "UserManager"
         ]
+    },
+    {
+        "path" : "/destroy",
+        "controller" : "User",
+        "action" : "Destroy",
+        "method" : "GET",
+        "param" : [
+            "id_user"
+        ],
+        "manager": [
+            "UserManager"
+        ]
     }
 ]

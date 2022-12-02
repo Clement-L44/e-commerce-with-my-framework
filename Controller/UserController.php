@@ -53,7 +53,7 @@
 		public function Update($id_user, $firstname, $lastname, $email, $phone)
 		{
 			$user = $this->UserManager->getById($id_user);
-			if($user != false){
+			if($user){
 				$user->setFirstname($firstname);
 				$user->setLastname($lastname);
 				$user->setEmail($email);
@@ -65,6 +65,20 @@
 				} else {
 					$this->addParam("error", $request);
 					$this->view("update");
+				}
+			}
+		}
+
+		public function Destroy($id_user)
+		{
+			$user = $this->UserManager->getById($id_user);
+			if($user){
+				$request = $this->UserManager->delete($user);
+				if($request === true){
+					$this->redirect_to_route("/users");
+				} else {
+					$this->addParam("error", $request);
+					$this->redirect_to_route("/users");
 				}
 			}
 		}

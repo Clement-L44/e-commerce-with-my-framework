@@ -113,8 +113,9 @@
         public function delete($obj)
         {
             if(property_exists($obj, "id_user")){
-                $req = $this->_bdd->prepare("DELETE FROM ".$this->_table." WHERE id_user=?");
-                return $req->execute(array($obj->id));
+                //var_dump('ok');
+                $req = $this->_bdd->prepare("DELETE FROM ".$this->_table." WHERE id_user= ?");
+                return $req->execute(array($obj->getId()));
             } else {
                 throw new PropertyNotFoundException($this->_object, "id_user");
             }
