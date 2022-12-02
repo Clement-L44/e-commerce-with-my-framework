@@ -1,5 +1,13 @@
 [
     {
+        "path" : "/Error",
+        "controller" : "Error",
+        "action" : "Show",
+        "method" : "GET",
+        "param" : [],
+        "manager": []
+    },
+    {
         "path" : "/",
         "controller" : "Home",
         "action" : "Home",
@@ -29,14 +37,6 @@
         ]
     },
     {
-        "path" : "/Error",
-        "controller" : "Error",
-        "action" : "Show",
-        "method" : "GET",
-        "param" : [],
-        "manager": []
-    },
-    {
         "path" : "/register",
         "controller" : "User",
         "action" : "Register",
@@ -61,23 +61,39 @@
         ]
     },
     {
-        "path" : "/user/update",
+        "path" : "/users",
         "controller" : "User",
-        "action" : "Update",
-        "method" : "PUT",
+        "action" : "ListUsers",
+        "method" : "GET",
+        "param" : [],
+        "manager": [
+            "UserManager"
+        ]
+    },
+    {
+        "path" : "/user",
+        "controller" : "User",
+        "action" : "getUser",
+        "method" : "GET",
         "param" : [
-            "id"
+            "id_user"
         ],
         "manager": [
             "UserManager"
         ]
     },
     {
-        "path" : "/users",
+        "path" : "/user",
         "controller" : "User",
-        "action" : "ListUsers",
-        "method" : "GET",
-        "param" : [],
+        "action" : "Update",
+        "method" : "POST",
+        "param" : [
+            "id_user",
+            "firstname",
+            "lastname",
+            "email",
+            "phone"
+        ],
         "manager": [
             "UserManager"
         ]

@@ -14,13 +14,12 @@
         const ROLE_USER = 'role_user';
         const ROLE_ADMIN = 'role_admin';
 
-        public function __construct($firstname, $lastname, $email, $phone, $password)
+        public function __construct($firstname, $lastname, $email, $phone)
         {
             $this->firstname = $firstname;
             $this->lastname = $lastname;
             $this->email = $email;
             $this->phone = $phone;
-            $this->password = $password;
             $this->when_deleted = null;
             $this->roles = 'role_user';
         }

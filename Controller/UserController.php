@@ -17,9 +17,10 @@
 			return $this->view("register");
 		}
 
-		public function Registration($firstname, $lastname, $email, $phone, $password)
+		public function Registration(string $firstname, string $lastname, string $email, string $phone, string $password)
 		{
-			$user = new User($firstname, $lastname, $email, $phone, $password);
+			$user = new User($firstname, $lastname, $email, $phone);
+			$user->setPassword($password);
 			$request = $this->UserManager->create($user, ["firstname", "lastname", "email", "phone", "password", "roles", "when_deleted"]);
 
 			if($request === true){
@@ -37,10 +38,30 @@
 			return $this->view("listUsers");
 		}
 
-		public function Update(/*int $id_user*/)
+		public function getUser (int $id_user)
 		{
-			//var_dump('ok');
-			//$user = $this->UserManager->getById($id);
-			return $this->view("update");
+			$user = $this->UserManager->getById($id_user);
+			if($user != false){
+				$this->addParam("user", $user);
+				return $this->view("update");
+			} else {
+				$this->redirect_to_route("/users");
+			}
+			
+		}
+
+		public function Update($id_user, $firstname, $lastname, $email, $phone)
+		{
+			$user = $this->UserManager->getById($id_user, ["firtsname", "lastname", "email", "phone"]);
+			var_dump($user);
+			if($user != false){
+				//$user->setFirstname($firstname);
+				//$user->setLastname($lastname);
+				//$user->setEmail($email);
+				//$user->setPhone($phone);
+				//$this->UserManager->update($user, array("firstname", "lastname", "email", "phone"));
+			}
+
+			//var_dump($id_user, $firstname, $lastname, $email, $phone);
 		}
 	}

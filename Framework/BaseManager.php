@@ -8,21 +8,24 @@
         private $_object;
         // Instance of the BDD class
         protected $_bdd;
+        // Constructor for fetch mode : FETCH_CLASS in third argument.
+        private $_constructor;
 
         // datasource : Connection string
-        public function __construct($table, $object, $datasource)
+        public function __construct($table, $object, $datasource, $constructor)
         {
             $this->_table = $table;
             $this->_object = $object;
             // Method static
             $this->_bdd = BDD::getInstance($datasource);
+            $this->_constructor = $constructor;
         }
 
         public function getById($id)
         {
-            $req = $this->_bdd->prepare("SELECT * FROM ".$this->_table." WHERE id=?");
+            $req = $this->_bdd->prepare("SELECT * FROM ".$this->_table." WHERE id_user=?");
             $req->execute(array($id));
-            $req->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, $this->_object);
+            $req->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, $this->_object, $this->_constructor);
             return $req->fetch();
         }
 
@@ -77,9 +80,9 @@
             foreach($param as $paramName){
                 $sql = $sql.$paramName." = ?, ";
             }
-            $sql = $sql." WHERE id=? ";
+            $sql = $sql." WHERE id_user=? ";
             $req = $this->_bdd->prepare($sql);
-            $param[] = 'id';
+            $param[] = 'id_user';
             /**
              * !! Execute expects an array with the exact number of parameters provided in the request and in the correct order, while $obj is an object that contains all the properties. !!
              */
@@ -92,16 +95,22 @@
                 }
                 
             }
-            $req->execute($boundParam);
+            $exec = $req->execute($boundParam);
+
+            if($exec == false){
+                return "Error code : " .$req->errorCode()." - Message : ".$req->errorInfo()[2];
+            } else {
+                return $exec;
+            }
         }
 
         public function delete($obj)
         {
-            if(property_exists($obj, "id")){
-                $req = $this->_bdd->prepare("DELETE FROM ".$this->_table." WHERE id=?");
+            if(property_exists($obj, "id_user")){
+                $req = $this->_bdd->prepare("DELETE FROM ".$this->_table." WHERE id_user=?");
                 return $req->execute(array($obj->id));
             } else {
-                throw new PropertyNotFoundException($this->_object, "id");
+                throw new PropertyNotFoundException($this->_object, "id_user");
             }
 
         }

@@ -16,15 +16,11 @@
 		
 		public function findRoute($httpRequest, $basepath)
 		{
-			$url = str_replace($basepath,"",$httpRequest->getUrl());
-
-			var_dump($url);
+			$url = str_replace($basepath,"",parse_url($httpRequest->getUrl(), PHP_URL_PATH));
 			$method = $httpRequest->getMethod();
-			// Finds the route(s) associated with the HTTP request
 			$routeFound = array_filter($this->_listRoute,function($route) use ($url,$method){
 				return preg_match("#^" . $route->path . "$#", $url) && $route->method == $method;
 			});
-			var_dump($routeFound);
 			$numberRoute = count($routeFound);
 			if($numberRoute > 1)
 			{

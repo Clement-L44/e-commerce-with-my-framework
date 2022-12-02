@@ -101,8 +101,10 @@
         public function get__param(string $param = null){
             if($param != null && array_key_exists($param, $this->_param)){
                 return $this->_param[$param];
-            } else {
+            } else if($param == null) {
                 return $this->_param;
+            } else {
+                return null;
             }
         }
     }
