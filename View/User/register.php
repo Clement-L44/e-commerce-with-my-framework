@@ -1,3 +1,4 @@
+<h1>Register</h1>
 
 <?php if(array_key_exists("error", $this->_param)): ?>
 	<p> <?php  echo $this->_param["error"] ?> </p>

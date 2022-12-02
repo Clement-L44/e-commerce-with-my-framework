@@ -52,16 +52,20 @@
 
 		public function Update($id_user, $firstname, $lastname, $email, $phone)
 		{
-			$user = $this->UserManager->getById($id_user, ["firtsname", "lastname", "email", "phone"]);
-			var_dump($user);
+			$user = $this->UserManager->getById($id_user);
 			if($user != false){
-				//$user->setFirstname($firstname);
-				//$user->setLastname($lastname);
-				//$user->setEmail($email);
-				//$user->setPhone($phone);
-				//$this->UserManager->update($user, array("firstname", "lastname", "email", "phone"));
-			}
+				$user->setFirstname($firstname);
+				$user->setLastname($lastname);
+				$user->setEmail($email);
+				$user->setPhone($phone);
 
-			//var_dump($id_user, $firstname, $lastname, $email, $phone);
+				$request = $this->UserManager->update($user, array("firstname", "lastname", "email", "phone"));
+				if($request === true){
+					$this->redirect_to_route("/user?id_user=".$id_user);
+				} else {
+					$this->addParam("error", $request);
+					$this->view("update");
+				}
+			}
 		}
 	}
